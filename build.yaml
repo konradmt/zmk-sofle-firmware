@@ -1,24 +1,46 @@
-# This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command, `snippet` to add a Zephyr snippet, and
-# `artifact-name` to assign a name to distinguish build outputs from each other:
-#
-# board: [ "nice_nano" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano
-#     shield: reviung41
-#   - board: nice_nano
-#     shield: corne_left
-#     snippet: studio-rpc-usb-uart
-#     cmake-args: -DCONFIG_ZMK_STUDIO=y
-#     artifact-name: corne_left_with_studio
-#
----
 include:
+# Sofle without dongle 不带dongle的Sofle
+  # Sofle with oled display(with nice_oled module) 适用于带oled的Sofle
+  - board: nice_nano_v2
+    shield: Sofle_L nice_oled
+    snippet: studio-rpc-usb-uart
+    artifact-name: Sofle_left_oled
+  - board: nice_nano_v2
+    shield: Sofle_R nice_oled
+    artifact-name: Sofle_right_oled
+  # Sofle with nice!view display(with nice_view_custom module) 适用于带nice_view的Sofle
+  - board: nice_nano_v2
+    shield: Sofle_L Nice_view_config nice_view_custom
+    snippet: studio-rpc-usb-uart
+    artifact-name: Sofle_left_nice_view
+  - board: nice_nano_v2
+    shield: Sofle_R Nice_view_config nice_view_custom
+    artifact-name: Sofle_right_nice_view
+
+
+#Sofle with dongle 带dongle的Sofle
+  # dongle with LCD display 带LCD显示的dongle
+  - board: nice_nano_v2
+    shield: Sofle_dongle_central dongle_screen
+    snippet: studio-rpc-usb-uart
+    artifact-name: Sofle_central_dongle
+  # peripheral with oled display(with nice_oled module)
+  - board: nice_nano_v2
+    shield: Sofle_dongle_left nice_oled
+    artifact-name: Sofle_peripheral_left_oled
+  - board: nice_nano_v2
+    shield: Sofle_dongle_right nice_oled
+    artifact-name: Sofle_peripheral_right_oled
+  # peripheral with nice!view display(with nice_view_custom module)
+  - board: nice_nano_v2
+    shield: Sofle_dongle_left Nice_view_config nice_view_custom
+    artifact-name: Sofle_peripheral_left_nice_view
+  - board: nice_nano_v2
+    shield: Sofle_dongle_right Nice_view_config nice_view_custom
+    artifact-name: Sofle_peripheral_right_nice_view
+
+  - board: nice_nano_v2
+    shield: settings_reset
   - board: nice_nano_v2
     shield: sofle_left
   - board: nice_nano_v2
